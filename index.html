@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+  <meta name="theme-color" content="#0a1020">
+  <meta name="description" content="認識されるな - 絵文字の敵の視界を避けて脱出する、1画面ステルスゲーム。">
+  <title>認識されるな | ONE TAKE GAME #005</title>
+  <link rel="stylesheet" href="./style.css">
+  <script src="./game.js" defer></script>
+</head>
+<body>
+  <main class="app">
+    <header class="topbar">
+      <div class="identity"><span class="eyebrow">ONE TAKE GAME <b>#005</b></span><h1>認識されるな</h1></div>
+      <button class="mute-toggle" type="button" data-mute aria-label="音声をオンにする" aria-pressed="false">🔇 <span>OFF</span></button>
+    </header>
+
+    <div class="hud" aria-live="off">
+      <div class="hud-left"><span id="stageName">STAGE —</span><span class="dot">·</span><span id="modeText">見つからずに脱出</span></div>
+      <div class="hud-time">TIME <strong id="timeText">00:00.00</strong></div>
+    </div>
+
+    <section class="field-shell" id="fieldShell" aria-label="ゲームステージ">
+      <canvas id="field" width="360" height="540" aria-hidden="true"></canvas>
+      <div class="entities" aria-hidden="true">
+        <span class="player" id="player">🧍</span>
+        <div class="enemy" id="enemy">
+          <span class="enemy-face" id="enemyFace">😁</span>
+          <span class="enemy-hand" data-hand="0">👆</span>
+          <span class="enemy-hand" data-hand="1">👉</span>
+          <span class="enemy-hand" data-hand="2">👇</span>
+          <span class="enemy-hand" data-hand="3">👈</span>
+        </div>
+      </div>
+      <div id="flash" class="flash" aria-hidden="true"></div>
+      <div id="alertMessage" class="alert-message" aria-live="assertive">認識された！</div>
+
+      <div class="veil" id="titleScreen">
+        <div class="menu-card">
+          <div class="menu-label">ONE TAKE GAME #005</div>
+          <div class="preview-enemy" aria-hidden="true"><span class="preview-face">😁</span><span class="pv pv-t">👆</span><span class="pv pv-r">👉</span><span class="pv pv-b">👇</span><span class="pv pv-l">👈</span></div>
+          <h2>認識されるな</h2>
+          <p class="menu-description">敵に見つからず、出口まで逃げよう。<br>視界に入ると追いかけてくるぞ！</p>
+          <button class="primary-button" id="startButton" type="button">START <span aria-hidden="true">→</span></button>
+          <button class="menu-mute" type="button" data-mute>🔇 音声 OFF</button>
+          <p class="menu-help">スティックで移動 ／ PC：WASD・矢印キー</p>
+        </div>
+      </div>
+
+      <div class="veil is-hidden" id="resultScreen" aria-live="polite">
+        <div class="menu-card result-card">
+          <div class="menu-label" id="resultLabel">RESULT</div>
+          <div id="resultIcon" class="result-icon">✨</div>
+          <h2 id="resultTitle">脱出成功！</h2>
+          <p id="resultMessage" class="result-message">気付かれずに脱出した！</p>
+          <div id="recordBox" class="record-box"><div><span>TIME</span><strong id="resultTime">00:00.00</strong></div><div><span>BEST</span><strong id="resultBest">--:--.--</strong></div></div>
+          <div class="new-record" id="newRecord" hidden>NEW RECORD!</div>
+          <button class="primary-button" id="retryButton" type="button">もう一回 <span aria-hidden="true">↻</span></button>
+          <button class="menu-mute" type="button" data-mute>🔇 音声 OFF</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="controls" aria-label="移動操作">
+      <div class="joystick" id="joystick" role="group" aria-label="移動スティック（指で倒して移動）">
+        <div class="joystick-ring"></div><div class="joystick-knob" id="joystickKnob"></div>
+        <span class="joystick-symbol top">▲</span><span class="joystick-symbol bottom">▼</span><span class="joystick-symbol left">◀</span><span class="joystick-symbol right">▶</span>
+      </div>
+      <div class="control-copy"><span class="control-kicker">MOVE</span><strong>🧍 を出口へ</strong><small>指を離すと止まる<br>壁・箱・柱は視線を遮る</small></div>
+    </section>
+    <footer>EXIT を目指せ。見つかったら、逃げ切れ。</footer>
+  </main>
+</body>
+</html>
